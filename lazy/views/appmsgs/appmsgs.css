@@ -1,0 +1,92 @@
+
+
+h2 {
+    font-size: 15px;
+    padding-bottom: 16px;
+}
+
+.message-container {
+    text-align: center;
+    margin: 20px auto;
+    padding: 15px;
+    max-width: 90%;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.error-message {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #e53935;
+}
+
+.app-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #2196F3;
+    text-decoration: none;
+}
+
+.log-container {
+    display: none;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.log-container.active {
+    display: block;
+}
+
+.log-entry {
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #e0e0e0;
+    font-family: monospace;
+    word-break: break-word;
+}
+
+#logsubj {
+    display: none;
+}
+
+#logsubj.active {
+    display: block;
+}
+
+#appupdated {
+    display: none;
+}
+
+#appupdated.active {
+    display: block;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: white;
+    color: white;
+    border-radius: 8px;
+
+	& h2 {
+		font-size: 21px;
+		padding-bottom: 37px;
+	}
+	
+	& button {
+		background: var(--actioncolor);
+		border: none;
+		border-radius: 10px;
+		padding: 9px 25px;
+		font-size: 18px;
+		color: white;
+		cursor: pointer;
+	}
+}
+
+

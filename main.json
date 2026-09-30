@@ -1,0 +1,59 @@
+{
+  "INFO": {
+	"localdb": []
+  },
+  "LAZYLOADS": [
+	  {
+		"type": "view",
+		"urlmatch": "appmsgs",
+		"localdb": [],
+		"name": "appmsgs",
+		"is_instance": false,
+		"dependencies": [],
+		"auth": []
+	  },
+
+	  {
+		"type": "component",
+		"name": "btn",
+		"is_instance": false,
+		"dependencies": null,
+		"auth": []
+	  },
+	  {
+		"type": "component",
+		"name": "header",
+		"is_instance": false,
+		"dependencies": null,
+		"auth": []
+	  },
+	  {
+		"type": "component",
+		"name": "ol2",
+		"is_instance": false,
+		"dependencies": [ { "type": "component", "name": "header" } ],
+		"auth": []
+	  },
+	  {
+		"type": "component",
+		"name": "in2",
+		"is_instance": false,
+		"dependencies": null,
+		"auth": []
+	  },
+	  {
+		"type": "component",
+		"name": "reveal",
+		"is_instance": false,
+		"dependencies": null,
+		"auth": []
+	  },
+	  {
+		"type": "thirdparty",
+		"name": "chartist",
+		"is_instance": false,
+		"dependencies": null,
+		"auth": []
+	  }
+	]
+}

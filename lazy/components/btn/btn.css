@@ -1,0 +1,113 @@
+
+
+:host {
+	--btn-actioncolor: #0091e8;
+	--icon-touch-size: 30px;
+	position: relative;
+	display: inline-block;
+	box-sizing: border-box;
+	height: var(--icon-touch-size);
+	min-width: var(--icon-touch-size);
+	border: 0.5px solid var(--bordercolor);
+	border-radius: 4px;
+	background: white;
+	box-shadow: 0 1px 0 rgb(235 235 235);
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+}
+
+:host([nobg]) {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+}
+
+:host([btngroup]) {
+	border: none;
+	box-shadow: 0 2px 9px 2px rgb(0 0 0 / 7%);
+}
+
+:host([primary]) {
+	border: none;
+	box-shadow: none;
+	background: var(--btn-actioncolor);
+}
+
+:host([small]) {
+	padding: 0 8px;
+	height: 24px;
+	font-size: 13px;
+}
+
+#slotwrap {
+	display: inline-flex;
+	align-items: center;
+	height: 100%;
+}
+
+:host([btngroup]) #slotwrap {
+	gap: 10px;
+}
+
+:host([spinning]) #slotwrap {
+	opacity: 0;
+}
+
+#spinner {
+	position: absolute;
+	inset: 0;
+	box-sizing: border-box;
+	display: none;
+	width: 16px;
+	height: 16px;
+	margin: auto;
+	border: 2px solid currentColor;
+	border-right-color: transparent;
+	border-radius: 50%;
+	animation: btn-spin 700ms linear infinite;
+}
+
+:host([spinning]) #spinner {
+	display: block;
+}
+
+:host([primary]) #spinner {
+	color: white;
+}
+
+@keyframes btn-spin {
+	to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#spinner { animation-duration: 2s; }
+}
+
+::slotted(c-btnitem) {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	height: 100%;
+	padding: 0 7px;
+}
+
+:host([btngroup]) ::slotted(c-btnitem[isactive]) {
+	border-radius: 15px;
+	background: #e8e8e8;
+}
+
+:host([primary]) ::slotted(c-btnitem) {
+	color: white;
+}
+
+:host([nobg][edge="start"]) ::slotted(c-btnitem[icon]) {
+	justify-content: flex-start;
+}
+
+:host([nobg][edge="end"]) ::slotted(c-btnitem[icon]) {
+	justify-content: flex-end;
+	min-width: var(--icon-touch-size);
+	padding-right: 0;
+}

@@ -1,0 +1,12 @@
+<!-- the empty title stops c-ol2's own title attribute from showing as a native tooltip over the whole overlay -->
+<dialog title="" aria-label="${this.title}" tabindex="-1"
+	@cancel="${(event) => this.handle_cancel(event)}"
+	@click="${(event) => this.handle_backdrop_click(event)}"
+	@pointermove="${(event) => this.move_swipe(event)}"
+	@pointerup="${(event) => this.end_swipe(event)}"
+	@pointercancel="${(event) => this.end_swipe(event)}">
+
+	<div class="swipe-indicator" aria-hidden="true" @pointerdown="${(event) => this.start_swipe(event)}"><span></span></div>
+	<c-header @pointerdown="${(event) => this.start_swipe(event)}"></c-header>
+	<div class="body"><slot></slot></div>
+</dialog>

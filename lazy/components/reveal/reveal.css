@@ -1,0 +1,36 @@
+
+:host {
+	box-sizing: border-box;
+	display: grid;
+	flex: 0 0 100%;
+	grid-template-rows: 0fr;
+	min-width: 100%;
+	order: 999;
+	transition: grid-template-rows 0.42s cubic-bezier(0.2, 0, 0, 1);
+	width: 100%;
+}
+
+:host([active]) {
+	grid-template-rows: 1fr;
+}
+
+.clip {
+	min-height: 0;
+	overflow: clip;
+}
+
+.wrap {
+	box-sizing: border-box;
+	display: flow-root;
+	opacity: 0;
+	padding-top: 0px;
+	transform: translateY(-8px);
+	transition:
+		opacity 0.24s ease,
+		transform 0.42s cubic-bezier(0.2, 0, 0, 1);
+}
+
+:host([active]) .wrap {
+	opacity: 1;
+	transform: translateY(0);
+}

@@ -1,0 +1,33 @@
+<div class="wrapper">
+
+    ${_s.showdatawipe ? html`
+		<div class="message-container">
+			<strong>App Data Refreshed</strong>
+			<br>
+			<a href="/v/home" class="app-link">Go to Home</a>
+		</div>
+    ` : ''}
+
+    ${_s.show_gen_logsubj && localStorage.getItem("id_token") ? html`
+		<div class="message-container">
+			<strong class="error-message">There was an error in the app.</strong>
+			<br>
+			<a href="/v/home" class="app-link">Go to Home</a>
+			<br><br>
+			<a href="#" @click="${()=>this.show_logs()}" class="app-link">Show Logs</a>
+		</div>
+    ` : ''}
+
+
+	<div id="logsubj" class="log-container ${_s.showlogs ? 'active' : ''}">
+		${_s.logs.map((row) => html`<div class="log-entry">${row}</div>`)}
+	</div>
+
+	<div id="appupdated" class="message-container ${_s.showappupdated ? 'active' : ''}">
+		<h2>App Updated</h2>
+		<button @click="${()=>window.location.href='/v/home'}">Go to Home</button>
+	</div>
+</div>
+
+
+

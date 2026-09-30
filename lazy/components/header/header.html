@@ -1,0 +1,10 @@
+
+<section id="leftcolumn">
+	${this.left_icon ? html`<i class="icon-${this.left_icon}" style="mask-image: var(--icon-${this.left_icon}, var(--icon-placeholder))" @click=${() => this.dispatchEvent(new Event('leftclick'))}></i>` : ''}
+</section>
+<section id="middlecolumn"><h1>${this.heading}</h1></section>
+<section id="rightcolumn">
+	<div id="actions">
+		${this.right_icons.map((icon, index) => html`<div class="action" @click=${() => this.dispatchEvent(new CustomEvent('actionclick', { detail: { icon, index } }))}><i class="icon-${icon}" style="mask-image: var(--icon-${icon}, var(--icon-placeholder))"></i></div>`)}
+	</div>
+</section>

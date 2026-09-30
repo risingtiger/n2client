@@ -1,0 +1,329 @@
+
+
+
+
+h1, h2, h3, h4, h5, h6, p, div, span, td, th {
+	margin: 0; padding: 0;
+	font-family: var(--fontfamily);
+	color: var(--textcolor);
+	font-size: var(--textsize);
+}
+
+
+:host {
+	background-color: var(--background);
+	color: red;
+}
+
+
+
+ul.items {
+	--liheight: 32px;
+
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+
+	> li {
+		text-indent: 0;
+		margin: 0; padding: 0;
+		height: var(--liheight);
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		flex-wrap: nowrap;
+		border-bottom-width: 0.5px;
+		border-bottom-style: solid;
+		border-bottom-color: var(--bordercolor);
+		cursor: pointer;
+		background: white;
+		-webkit-tap-highlight-color: transparent;
+
+		> .thumbnail {
+			box-sizing: border-box;
+			flex: 0 0 49px;
+			padding: 0 0 0 12px;
+
+			& img {
+				width: 27px;
+			}
+		}
+
+		> :is(span.label, span.field, span.value) {
+			flex: 1 1 auto;
+			min-width: 0;
+			overflow: hidden;
+			text-wrap: nowrap;
+			line-height: 1.2;
+
+			> i[class^="icon-"] {
+				line-height: 1.2;
+			}
+		}
+
+
+		> span.label { /* should only be one per li */
+			font-weight: 600;
+			padding: 0 0 0 12px;
+		}
+		> .thumbnail + span.label {
+			padding-left: 0;
+		}
+
+		> span.field { /* can have multiple per li. Use label first */
+			font-weight: 500;
+			padding: 0;
+		}
+
+		> span.value { /* should only be one per li, after label,field */
+			font-weight: 400;
+			padding: 0;
+			color: var(--textcolor);
+		}
+		> span.value:has(+ .actions) {
+			padding-right: 0;
+		}
+
+		> span.label:has(> :nth-child(2)),
+		> span.field:has(> :nth-child(2)) {
+			> span, > small {
+				display: block;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: clip;
+				line-height: 1.2;
+			}
+
+			> small {
+				color: var(--textcolor-fade);
+				font-size: 12px;
+				font-weight: 300;
+			}
+		}
+
+		> .actions { /* only one per li */
+			flex: 0 0 24px;
+			height: var(--liheight);
+			min-width: 18px;
+			padding-right: 0;
+			
+			
+			> .action {
+				height: var(--liheight);
+				width: 24px;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: var(--textcolor-fade);
+				
+
+				i[class^="icon-"] {
+				}
+			}
+		}
+
+		> .actions:has(> :nth-child(2)) {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			flex: 1 1 auto;
+			min-width: auto;
+		}
+	}
+
+	> li:first-child {
+		border-top-width: 0.5px;
+		border-top-style: solid;
+		border-top-color: var(--bordercolor);
+	}
+
+	> li:hover {
+		background: #f7f7f7;
+
+		> .actions > .action {
+			color: var(--textcolor);
+		}
+	}
+
+	/* c-reveal must be the li's last child; it exists in the DOM only while expanded */
+	/* Unhandled Case: wrap breaks lines at each item's full content width, so a row whose label/fields/value overflow the li pushes its trailing items (e.g. .actions) onto a second line while expanded. */
+	> li:has(> c-reveal) {
+		height: auto;
+		min-height: var(--liheight);
+		flex-wrap: wrap;
+		align-content: flex-start;
+	}
+	/* zero-width strut holds the row's first line at --liheight while expanded. without it a row with no .actions (the only child sized to --liheight) shrinks its first line to text height and the label jumps up */
+	> li:has(> c-reveal)::before {
+		content: "";
+		flex: 0 0 0;
+		height: var(--liheight);
+	}
+	> li:has(> c-reveal) > span.label {
+		transition: transform 0.42s cubic-bezier(0.2, 0, 0, 1);
+		transform-origin: 10px 30px;
+	}
+	> li:has(> c-reveal[active]) > span.label {
+		transform: scale(1.1);
+	}
+
+	/* the revealed panel isn't part of the clickable row: no pointer cursor, and hovering it doesn't trigger the row's hover highlight */
+	> li > c-reveal {
+		cursor: auto;
+	}
+	> li:has(> c-reveal:hover) {
+		background: white;
+
+		> .actions > .action {
+			color: var(--textcolor-fade);
+		}
+	}
+}
+
+
+@media (pointer: coarse) {
+	ul.items {
+		--liheight: 52px;
+
+		> li {
+			font-size: 17px;
+
+			> .thumbnail {
+				flex-basis: 53px;
+				padding-left: 16px;
+			}
+
+			> span.label {
+				padding-left: 16px;
+			}
+
+			> span.field,
+			> span.value {
+				padding-left: 4px;
+			}
+
+			> .actions {
+				padding-right: 12px;
+			}
+		}
+
+		> li:hover {
+			background: white;
+		}
+	}
+}
+
+
+/*
+	div.card
+		> header            (optional .avatar, then hgroup > h1 + p)
+		> section.content
+		> footer
+*/
+div.card {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	box-sizing: border-box;
+	padding: 24px 0;
+	background: #f9f9f9;
+	border-radius: 0;
+	border: 2px solid #9d0c0c;
+	
+
+	> header {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		padding: 0 24px;
+
+		> hgroup {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+			flex: 1 1 auto;
+			min-width: 0;
+			margin: 0;
+		}
+	}
+
+	h1 {
+		font-size: 16px;
+		font-weight: 600;
+		line-height: 1;
+		letter-spacing: -0.01em;
+	}
+
+	header p { /* description under the title */
+		font-size: 14px;
+		line-height: 1.4;
+		color: var(--textcolor-fade);
+	}
+
+	> section.content {
+		padding: 0 24px;
+
+		> p {
+			font-size: 14px;
+			line-height: 1.5;
+		}
+
+		> p + p {
+			margin-top: 12px;
+		}
+	}
+
+	> footer {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 0 24px;
+	}
+
+	small {
+		font-size: 12px;
+		color: var(--textcolor-fade);
+	}
+
+	.avatar { /* holds an img, or initials text as a fallback */
+		flex: 0 0 40px;
+		width: 40px;
+		height: 40px;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		border-radius: 50%;
+		background: #f4f4f5;
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--textcolor-fade);
+
+		> img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+
+/* Only the placeholder ships with core CSS. Named SVG masks inherit from the deferred instance/icons.css. */
+:root {
+	--icon-placeholder: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='7' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+
+i[class^="icon-"] {
+	width: 11px; /* default width. can be set per instance and svg will scale accordingly */
+	height: 11px; /* default height. can be set per instance and svg will scale accordingly */
+	display: inline-block;
+	background-color: currentColor;
+	mask-image: var(--icon-placeholder);
+	mask-repeat: no-repeat;
+	mask-position: center;
+	mask-size: contain;
+}
